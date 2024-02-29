@@ -1,0 +1,36 @@
+﻿@model SISTEMA_AULA.MODEL.Models.Unidade
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalhes da Unidade</h1>
+
+<div>
+ 
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UnCodigo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UnCodigo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UnDescricao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UnDescricao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UnDesativado)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UnDesativado)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Editar", "Edit", new {  id = Model.UnCodigo }) |
+    <a class="btn btn-primary" asp-action="Index">Voltar para a Lista</a>
+</div>

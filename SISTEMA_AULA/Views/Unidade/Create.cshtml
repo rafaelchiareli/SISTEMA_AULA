@@ -1,0 +1,70 @@
+﻿@model SISTEMA_AULA.MODEL.Models.Unidade
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Cadastrar Unidade</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="UnDescricao" class="control-label"></label>
+                <input asp-for="UnDescricao" class="form-control" />
+                <span asp-validation-for="UnDescricao" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="UnDesativado" /> @Html.DisplayNameFor(model => model.UnDesativado)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar Dados" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<@* div class="alert-info">
+    @{
+    if (ViewData["Mensagem"] != null)
+    {
+    @ViewData["Mensagem"]
+    ;
+    }
+    }
+    </div>
+    <div class="alert-danger">
+    @{
+    if (ViewData["MensagemErro"] != null)
+    {
+    @ViewData["MensagemErro"]
+    ;
+    }
+    }
+    </div> *@
+<div>
+    <a class="btn btn-primary" asp-action="Index">Voltar para a lista</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+                        <script>
+    var mensagem = "@ViewData["Mensagem"]";
+    var mensagemErro = "@ViewData["MensagemErro"]";
+    </script>
+                        <script>
+    if (mensagem != "") {
+         Swal.fire(mensagem);
+    }
+    if (mensagemErro != "") {
+           Swal.fire(mensagemErro);
+    }
+    </script>
+}
