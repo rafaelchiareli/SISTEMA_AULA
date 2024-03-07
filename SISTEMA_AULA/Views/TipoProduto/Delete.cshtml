@@ -1,0 +1,39 @@
+﻿@model SISTEMA_AULA.MODEL.Models.TipoProduto
+
+@{
+    ViewData["Title"] = "Excluir";
+}
+
+<h1>Excluir Tipo de Produto</h1>
+
+<h3>Deseja realmente excluir o registro?</h3>
+<div>
+    <h4>Unidade</h4>
+    <hr />
+
+    <form asp-action="Delete">
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TipCodigo)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.EditorFor(model => model.TipCodigo)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TipDescricao)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.EditorFor(model => model.TipDescricao)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TipDestivado)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.EditorFor(model => model.TipDestivado)
+            </dd>
+        </dl>
+
+        <input type="submit" value="Sim, Excluir" class="btn btn-danger" /> |
+        <a class="btn btn-primary" asp-action="Index">Voltar para a Lista</a>
+    </form>
+</div>

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<SISTEMA_AULA.MODEL.Models.TipoPagamento>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TpgCodigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TpgDescricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TpgDesativado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TpgCodigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TpgDescricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TpgDesativado)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TpgCodigo }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

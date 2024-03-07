@@ -1,0 +1,36 @@
+﻿@model SISTEMA_AULA.MODEL.Models.TipoProduto
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalhes do Tipo de Produto</h1>
+
+<div>
+
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TipCodigo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TipCodigo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TipDescricao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TipDescricao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TipDestivado)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TipDestivado)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.TipCodigo }) |
+    <a class="btn btn-primary" asp-action="Index">Voltar para a Lista</a>
+</div>

@@ -1,0 +1,59 @@
+﻿@model SISTEMA_AULA.MODEL.Models.TipoProduto
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Alterar Tipo de Produto</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input asp-for="TipCodigo" type="hidden" />
+            <div class="form-group">
+                <label asp-for="TipDescricao" class="control-label"></label>
+                <input asp-for="TipDescricao" class="form-control" />
+                <span asp-validation-for="TipDescricao" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TipDestivado" /> @Html.DisplayNameFor(model => model.TipDestivado)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar Dados" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@{
+    if (ViewData["Mensagem"] != null)
+    {
+        <div class="alert-info">
+            @ViewData["Mensagem"]
+            ;
+        </div>
+    }
+
+    if (ViewData["MensagemErro"] != null)
+    {
+        <div class="alert-danger">
+            @ViewData["MensagemErro"];
+        </div>
+    }
+}
+
+<div>
+    <a class="btn btn-primary" asp-action="Index">Voltar para a lista</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
