@@ -1,8 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using SISTEMA_AULA.MODEL.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddDbContext<DbsistemasContext>(opt => opt.UseSqlServer("Server=.\\SQLExpress;Database=DBSISTEMAS;Trusted_Connection=True;trustservercertificate=true"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

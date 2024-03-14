@@ -2,7 +2,7 @@
 using SISTEMA_AULA.MODEL.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace SISTEMA_AULA.ViewModel
+namespace SISTEMA_AULA.MODEL.ViewModel
 {
     public class ClienteVM
     {

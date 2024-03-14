@@ -1,16 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SISTEMA_AULA.MODEL.Models;
+using SISTEMA_AULA.MODEL.Repositories;
 
 namespace SISTEMA_AULA.Controllers
 {
     public class TipoProdutoController : Controller
     {
+
+        private DbsistemasContext _context;
+        public RepositoryTipoProduto _RepositoryTipoProduto;
+
+        public TipoProdutoController(DbsistemasContext context)
+        {
+            _context = context;
+            _RepositoryTipoProduto = new RepositoryTipoProduto(context);
+        }
+
         public async Task<IActionResult> Index()
         {
-            var db = new DbsistemasContext();
 
-            return View(await db.TipoProdutos.ToListAsync());
+
+            return View(await _RepositoryTipoProduto.SelecionarTodosAsync());
         }
 
         public IActionResult Create()
@@ -20,11 +31,10 @@ namespace SISTEMA_AULA.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(TipoProduto tipoProduto)
         {
-            var db = new DbsistemasContext();
+
             if (ModelState.IsValid)
             {
-                db.Entry(tipoProduto).State = Microsoft.EntityFrameworkCore.EntityState.Added;
-                await db.SaveChangesAsync();
+                await _RepositoryTipoProduto.IncluirAsync(tipoProduto);
                 ViewData["Mensagem"] = "Dados salvos com sucesso.";
             }
             else
@@ -36,18 +46,19 @@ namespace SISTEMA_AULA.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var db = new DbsistemasContext();
-            var tipoProduto = await db.TipoProdutos.FindAsync(id);
+
+            var tipoProduto = await _RepositoryTipoProduto.SelecionarChaveAsync(id);
             return View(tipoProduto);
         }
+
         [HttpPost]
         public async Task<IActionResult> Edit(TipoProduto tipoProduto)
         {
-            var db = new DbsistemasContext();
+
             if (ModelState.IsValid)
             {
-                db.Entry(tipoProduto).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+
+                await _RepositoryTipoProduto.AlterarAsync(tipoProduto);
                 ViewData["Mensagem"] = "Dados alterados com sucesso.";
             }
             else
@@ -58,24 +69,22 @@ namespace SISTEMA_AULA.Controllers
         }
         public async Task<IActionResult> Details(int id)
         {
-            var db = new DbsistemasContext();
-            var tipoProduto = await db.TipoProdutos.FirstOrDefaultAsync(x => x.TipCodigo == id);
+
+            var tipoProduto = await _RepositoryTipoProduto.SelecionarChaveAsync(id);
             return View(tipoProduto);
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            var db = new DbsistemasContext();
-            var unidade = await db.TipoProdutos.FirstOrDefaultAsync(x => x.TipCodigo == id);
+
+            var unidade = await _RepositoryTipoProduto.SelecionarChaveAsync(id);
             return View(unidade);
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(TipoProduto tipoProduto)
         {
-            var db = new DbsistemasContext();
-            db.Entry(tipoProduto).State = EntityState.Deleted;
-            await db.SaveChangesAsync();
+            await _RepositoryTipoProduto.ExcluirAsync(tipoProduto);
             return RedirectToAction("Index");
         }
 
