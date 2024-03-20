@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ClienteVM>
+
+<h2>Lista de Clientes</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Data de Nascimento</th>
+            <th>Sexo</th>
+            <th>Telefone</th>
+            <th>Email</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var clienteVm in Model)
+        {
+            <tr>
+                <td>@clienteVm.NomeCliente</td>
+                <td>@clienteVm.DataNascimento</td>
+                <td>@clienteVm.Sexo</td>
+                <td>@clienteVm.Telefone</td>
+                <td>@clienteVm.Email</td>
+            </tr>
+
+        }
+    </tbody>
+</table>

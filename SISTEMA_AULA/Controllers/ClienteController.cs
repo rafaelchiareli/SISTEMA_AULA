@@ -31,12 +31,17 @@ namespace SISTEMA_AULA.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ClienteVM clienteVM)
         {
+            if(ModelState.IsValid)
+            {
 
-            ClienteVM clienteVMNovo = new ClienteVM();
-            clienteVMNovo = await _serviceCliente.IncluirClienteAsync(clienteVM);
-            return View(clienteVMNovo);
+                ClienteVM clienteVMNovo = new ClienteVM();
+                clienteVMNovo = await _serviceCliente.IncluirClienteAsync(clienteVM);
+                return View(clienteVMNovo);
+            }
+            return View(clienteVM);
 
-                  
+
+
 
 
         }

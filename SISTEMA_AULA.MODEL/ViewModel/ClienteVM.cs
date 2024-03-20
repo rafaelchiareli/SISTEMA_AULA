@@ -8,12 +8,13 @@ namespace SISTEMA_AULA.MODEL.ViewModel
     {
         //Informações do cliente
         [Display(Name ="Código do Cliente")]
-        public int CodigoCliente { get; set; }
+        public int? CodigoCliente { get; set; }
 
+        [StringLength(100, MinimumLength = 5, ErrorMessage ="O Tamanho não pode ser menor que 5")]
         public string NomeCliente { get; set; }
         public string Sexo { get; set; }
-        public string CPF { get; set; }
-        public string CNPJ { get; set; }
+        public string? CPF { get; set; }
+        public string? CNPJ { get; set; }
         public string Telefone { get; set; }
         public string Email { get; set; }
         public DateTime? DataNascimento { get; set; }
@@ -22,7 +23,7 @@ namespace SISTEMA_AULA.MODEL.ViewModel
 
         //informações do Endereço
 
-        public int CodigoEndereco { get; set; }
+        public int? CodigoEndereco { get; set; }
         public string CEP { get; set; }
         public string Logradouro { get; set; }
         public string Bairro { get; set; }

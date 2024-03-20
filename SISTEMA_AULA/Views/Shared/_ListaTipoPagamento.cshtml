@@ -1,0 +1,45 @@
+﻿@model IEnumerable<TipoPagamento>
+
+<h2>
+    Lista de Tipos de Pagamento
+</h2>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TpgCodigo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TpgDescricao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TpgDesativado)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tipoPagamento in Model)
+            {
+                <tr>
+                    <td>
+                        @tipoPagamento.TpgCodigo
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => tipoPagamento.TpgDescricao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => tipoPagamento.TpgDesativado)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = tipoPagamento.TpgCodigo }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

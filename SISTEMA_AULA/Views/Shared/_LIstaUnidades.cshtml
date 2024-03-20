@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Unidade>
+
+
+<h1>Listagem de Unidades</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create"><i class="fa-regular fa-file"></i>&nbsp;Cadastrar Novo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UnCodigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnDescricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnDesativado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnCodigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnDescricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnDesativado)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.UnCodigo }) |
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.UnCodigo }) |
+                    @Html.ActionLink("Excluir", "Delete", new { id = item.UnCodigo })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
