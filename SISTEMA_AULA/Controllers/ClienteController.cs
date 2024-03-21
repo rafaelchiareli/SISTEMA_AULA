@@ -36,6 +36,7 @@ namespace SISTEMA_AULA.Controllers
 
                 ClienteVM clienteVMNovo = new ClienteVM();
                 clienteVMNovo = await _serviceCliente.IncluirClienteAsync(clienteVM);
+                ViewData["Mensagem"] = "Dados salvos com sucesso";
                 return View(clienteVMNovo);
             }
             return View(clienteVM);

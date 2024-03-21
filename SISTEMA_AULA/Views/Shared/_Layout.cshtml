@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - SISTEMA_AULA</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/dataTables.dataTables.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/sweetalert2.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/fontawesome/css/all.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SISTEMA_AULA.styles.css" asp-append-version="true" />
@@ -39,6 +40,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Cadastro de Clientes</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Produto" asp-action="Index">Cadastro de Produtos</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -59,6 +63,8 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/dataTables.min.js" asp-append-version="true"></script>
+    <script src="~/js/Funcoes.js" asp-append-version="true"></script>
     <script src="~/js/sweetalert2.all.min.js" asp-append-version="true"></script>
     <script src="~/fontawesome/js/all.min.js" asp-append-version="true"></script>
 

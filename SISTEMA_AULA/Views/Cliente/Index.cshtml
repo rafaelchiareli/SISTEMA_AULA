@@ -13,3 +13,9 @@
 <div>
   @await  Html.PartialAsync("_ListaClientes", Model)
 </div>
+@section Scripts {
+
+    <script>
+        ConfiguraDataTable("tabela");
+    </script>
+}

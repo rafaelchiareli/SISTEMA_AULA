@@ -10,15 +10,20 @@ namespace SISTEMA_AULA.MODEL.ViewModel
         [Display(Name ="Código do Cliente")]
         public int? CodigoCliente { get; set; }
 
+        [Display(Name ="Nome do Cliente")]
         [StringLength(100, MinimumLength = 5, ErrorMessage ="O Tamanho não pode ser menor que 5")]
         public string NomeCliente { get; set; }
+        [StringLength(1)]
         public string Sexo { get; set; }
         public string? CPF { get; set; }
         public string? CNPJ { get; set; }
         public string Telefone { get; set; }
         public string Email { get; set; }
+        [Display(Name = "Data de Nascimento")]
+      
         public DateTime? DataNascimento { get; set; }
         public DateTime? DataCadastro { get; set; }
+        [Display(Name = "Nome da Mãe")]
         public string NomeMae { get; set; }
 
         //informações do Endereço

@@ -12,7 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
+
             <div class="form-group">
                 <label asp-for="NomeCliente" class="control-label"></label>
                 <input asp-for="NomeCliente" class="form-control" />
@@ -20,15 +20,29 @@
             </div>
             <div class="form-group">
                 <label asp-for="Sexo" class="control-label"></label>
-                <input asp-for="Sexo" class="form-control" />
+                <select asp-for="Sexo" class="form-select">
+                    <option selected value="">Selecione um Sexo</option>
+                    <option value="F">Feminino</option>
+                    <option value="M">Masculino</option>
+                </select>
                 <span asp-validation-for="Sexo" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label class="control-label">Tipo de Pessoa</label>
+                <select class="form-select" id="tipoPessoa">
+                    <option selected value="">Selecione o Tipo de Pessoa</option>
+                    <option value="F">Física</option>
+                    <option value="J">Jurídica</option>
+                </select>
+
+            </div>
+
+            <div class="form-group" id="divCPF" style="display:none">
                 <label asp-for="CPF" class="control-label"></label>
                 <input asp-for="CPF" class="form-control" />
                 <span asp-validation-for="CPF" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="divCNPJ" style="display:none">
                 <label asp-for="CNPJ" class="control-label"></label>
                 <input asp-for="CNPJ" class="form-control" />
                 <span asp-validation-for="CNPJ" class="text-danger"></span>
@@ -58,7 +72,7 @@
                 <input asp-for="NomeMae" class="form-control" />
                 <span asp-validation-for="NomeMae" class="text-danger"></span>
             </div>
-         
+
             <div class="form-group">
                 <label asp-for="CEP" class="control-label"></label>
                 <input asp-for="CEP" class="form-control" />
@@ -106,24 +120,45 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
-   <script>
+    }
+    <script>
+        var mensagem = "@ViewData["Mensagem"]";
+        var mensagemErro = "@ViewData["MensagemErro"]";
+    </script>
+    <script>
 
-       $("#CEP").on("blur", function () {
-           var cep = $(this).val();
+        $("#CEP").on("blur", function () {
+            var cep = $(this).val();
             $.get(`https://viacep.com.br/ws/${cep}/json/`, function (data) {
-
-
                 $("#Logradouro").val(data.logradouro);
                 $("#Bairro").val(data.bairro);
                 $("#Cidade").val(data.localidade);
                 $("#Estado").val(data.uf);
-                
-            
-
             })
-       })
-        
-   </script>
+        })
+
+        $("#tipoPessoa").on("change", function () {
+            console.log("aqui");
+            var tipoPessoa = $(this).val();
+            if (tipoPessoa == "F") {
+                $("#divCPF").css("display", "block");
+                $("#divCNPJ").css("display", "none");
+            }
+            else if (tipoPessoa == "J") {
+                $("#divCPF").css("display", "none");
+                $("#divCNPJ").css("display", "block");
+            }
+            else {
+                $("#divCPF").css("display", "none");
+                $("#divCNPJ").css("display", "none");
+            }
+        });
+
+        if (mensagem != ""){
+            ExibirMensagem("Cadastro de Clientes", mensagem);
+        }
+    </script>
 }
