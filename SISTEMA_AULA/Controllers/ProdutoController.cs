@@ -27,7 +27,25 @@ namespace SISTEMA_AULA.Controllers
         {
             ViewBag.listaTipoProduto = await  _ServiceProduto.oRepositoryTipoProduto.SelecionarTodosAsync();
             ViewBag.TiposProduto = new SelectList(await _ServiceProduto.oRepositoryTipoProduto.SelecionarTodosAsync(), nameof(TipoProduto.TipCodigo), nameof(TipoProduto.TipDescricao));
+            ViewBag.Unidades = new SelectList(await _ServiceProduto.oRepositoryUnidade.SelecionarTodosAsync(), nameof(Unidade.UnCodigo), nameof(Unidade.UnDescricao));
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Produto produto)
+        {
+            if (ModelState.IsValid)
+            {
+                await _ServiceProduto.oRepositoryProduto.IncluirAsync(produto);
+                ViewData["Mensagem"] = "Dados salvos com sucesso.";
+                return View(produto);
+            }
+            else
+            {
+                ViewData["MensagemErro"] = "Ocorreu um erro ao salvar os dados.";
+                return View();
+
+            }
         }
 
 

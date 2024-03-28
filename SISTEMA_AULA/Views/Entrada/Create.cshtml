@@ -1,0 +1,124 @@
+﻿@model SISTEMA_AULA.MODEL.ViewModel.EntradaVM
+
+<h4>EntradaVM</h4>
+<hr />
+<div class="row">
+    <div class="col">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="@Model.CodigoEntrada" />
+            <div class="form-group">
+                <label asp-for="DataEntarda" class="control-label"></label>
+                <input asp-for="DataEntarda" class="form-control" />
+                <span asp-validation-for="DataEntarda" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumeroNF" class="control-label"></label>
+                <input asp-for="NumeroNF" class="form-control" />
+                <span asp-validation-for="NumeroNF" class="text-danger"></span>
+            </div>
+
+            <div style="display:flex;gap:5px">
+                <div class="col-md-3">
+                    <label class="form-label">Produto</label>
+                    <select id="cboProduto" class="form-select">
+                        <option selected value="">Selecione um produto</option>
+                        @{
+                            foreach (Produto produto in ViewBag.listaProdutos)
+                            {
+                                <option value="@produto.ProCodigo">@produto.ProDescricao</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Quantidade</label>
+                    <input type="text" class="form-control" id="txtQuantidade" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Valor Custo</label>
+                    <input type="text" class="form-control" id="txtValorCusto" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Valor Custo</label>
+                    <input type="text" class="form-control" id="txtValorVenda" />
+                </div>
+                <div style="display:flex;align-items:end">
+                    <button onclick="Adicionar()" style="height:30px;margin-bottom:5px;" type="button" class="btn btn-primary"><i class="fa fa-plus"></i>Adicionar</button>
+                </div>
+            </div>
+            <div>
+                <table class="table table-striped" id="tbProdutos">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Valor Custo</th>
+                            <th>Valor Venda</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+
+                            for (int i = 0; i < Model.ListaProdutos.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="hidden" value="@Model.ListaProdutos[i].CodigoProduto" name="ListaProdutos[@i].CodigoProduto" />
+                                        @Model.ListaProdutos[i].DescricaoProduto
+                                    </td>
+                                    <td>
+                                        <input type="hidden" value="@Model.ListaProdutos[i].Quantidade" name="ListaProdutos[@i].Quantidade" />
+                                        @Model.ListaProdutos[i].Quantidade
+                                    </td>
+                                    <td>
+                                        <input type="hidden" value="@Model.ListaProdutos[i].ValorCusto" name="ListaProdutos[@i].ValorCusto" />
+                                        @Model.ListaProdutos[i].ValorCusto
+                                    </td>
+                                    <td>
+                                        <input type="hidden" value="@Model.ListaProdutos[i].ValorVenda" name="ListaProdutos[@i].ValorVenda" />
+                                        @Model.ListaProdutos[i].ValorVenda
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+        function Adicionar() {
+            var produto = $("#cboProduto").val();
+            var quantidade = $("#txtQuantidade").val();
+            var valorCusto = $("#txtValorCusto").val();
+            var valorVenda = $("#txtValorVenda").val();
+            var descProduto = $("#cboProduto option:selected").text();
+
+            var contador = $("#tbProdutos tbody tr").length;
+            if (produto == "" || quantidade == "" || valorCusto == "" || valorVenda == "") {
+                ExibirMensagem("Entrada de Produtos", "Por favor preencha todos os campos", true);
+            }
+            else {
+                var linha = `<tr><td><input type="hidden" value="${produto}" name="ListaProdutos[${contador}].CodigoProduto" />${descProduto}</td>`
+                    + `<td><input type="hidden" value="${quantidade}" name="ListaProdutos[${contador}].Quantidade" />${quantidade}</td>`
+                    + `<td><input type="hidden" value="${valorCusto}" name="ListaProdutos[${contador}].ValorCusto" />${valorCusto}</td>`
+                    + `<td><input type="hidden" value="${valorVenda}" name="ListaProdutos[${contador}].ValorVenda" />${valorVenda}</td></tr>`;
+                $("#tbProdutos tbody").append(linha);
+            }
+        }
+
+    </script>
+}

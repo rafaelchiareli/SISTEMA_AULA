@@ -12,6 +12,7 @@ namespace SISTEMA_AULA.MODEL.Services
     {
         public RepositoryProduto oRepositoryProduto { get; set; }
         public RepositoryTipoProduto oRepositoryTipoProduto { get; set; }
+        public RepositoryUnidade oRepositoryUnidade { get; set; }
 
         private DbsistemasContext _context;
 
@@ -19,7 +20,8 @@ namespace SISTEMA_AULA.MODEL.Services
         {
             _context = context;
             oRepositoryProduto = new RepositoryProduto(context);    
-            oRepositoryTipoProduto = new RepositoryTipoProduto(context);    
+            oRepositoryTipoProduto = new RepositoryTipoProduto(context);
+            oRepositoryUnidade = new RepositoryUnidade(context);    
         }
     }
 }
