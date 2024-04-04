@@ -1,0 +1,89 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "DBSISTEMASContext",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": true,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "SISTEMA_AULA.MODEL",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[CLIENTE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CONFIGURACAO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ENDERECO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ENTRADA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ENTRADA_PRODUTO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ITENS_VENDA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PARCELAS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PRODUTO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TIPO_PAGAMENTO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TIPO_PRODUTO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UNIDADE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[VENDA]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

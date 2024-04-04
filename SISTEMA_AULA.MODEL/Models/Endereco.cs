@@ -23,5 +23,6 @@ public partial class Endereco
 
     public string EndEstado { get; set; } = null!;
 
-    public virtual Cliente EndCodigoClienteNavigation { get; set; } = null!;
+    public Cliente ClienteEndereco { get; set; }
+
 }

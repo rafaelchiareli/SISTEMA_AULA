@@ -40,10 +40,12 @@ namespace SISTEMA_AULA.MODEL.Services
                     EnpQuantidade = item.Quantidade,
                     EnpValorCusto = item.ValorCusto,
                     EnpValorVenda = item.ValorVenda,
+                    EnpCodigoEntrada = (int)entradaVM.CodigoEntrada!
 
                 };
                 listaEntradaProdutos.Add(entradaProduto);
             }
+           
             entrada.EntradaProdutos = listaEntradaProdutos;
             await oRepositoryEntrada.IncluirAsync(entrada);
             return entradaVM;
@@ -74,7 +76,7 @@ namespace SISTEMA_AULA.MODEL.Services
             }
             entrada.EntradaProdutos = listaEntradaProdutos;
 
-            await oRepositoryEntrada.AlterarAsync(entrada);
+            await oRepositoryEntrada.AlterarEntradaAsync(entrada);
             return entradaVM;
 
         }

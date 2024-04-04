@@ -48,10 +48,11 @@ namespace SISTEMA_AULA.MODEL.Services
                 EndNumero = clienteVM.Numero
             };
 
+            cliente.EnderecoCliente = endereco;
 
             await oRepositoryCliente.IncluirAsync(cliente);
-            endereco.EndCodigoCliente = cliente.CliCodigo;
-            await oRepositoryEndereco.IncluirAsync(endereco);
+          //  endereco.EndCodigoCliente = cliente.CliCodigo;
+         //   await oRepositoryEndereco.IncluirAsync(endereco);
 
             return clienteVM;
         }

@@ -19,7 +19,7 @@ namespace SISTEMA_AULA.MODEL.ViewModel
 
         public EntradaVM()
         {
-
+           
         }
 
 

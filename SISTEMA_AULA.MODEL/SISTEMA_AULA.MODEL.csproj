@@ -15,4 +15,12 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\chiar\source\repos\SISTEMA_AULA\SISTEMA_AULA.MODEL\ViewModel\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\chiar\source\repos\SISTEMA_AULA\SISTEMA_AULA.MODEL\ViewModel\.editorconfig" />
+  </ItemGroup>
+
 </Project>

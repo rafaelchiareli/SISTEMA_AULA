@@ -23,7 +23,6 @@ public partial class Cliente
 
     public DateTime? CliDataCadastro { get; set; }
 
-    public virtual ICollection<Endereco> Enderecos { get; set; } = new List<Endereco>();
-
+    public Endereco EnderecoCliente { get; set; }
     public virtual ICollection<Vendum> Venda { get; set; } = new List<Vendum>();
 }

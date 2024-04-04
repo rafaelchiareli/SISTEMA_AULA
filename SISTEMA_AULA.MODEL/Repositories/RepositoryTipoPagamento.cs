@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace SISTEMA_AULA.MODEL.Repositories
 {
-    public class RepositotyTipoPagamento : RepositoryBase<TipoPagamento>
+    public class RepositoryTipoPagamento : RepositoryBase<TipoPagamento>
     {
-        public RepositotyTipoPagamento(DbsistemasContext context, bool saveChanges) : base(context, saveChanges)
+        public RepositoryTipoPagamento(DbsistemasContext context, bool saveChanges = true) : base(context, saveChanges)
         {
 
         }

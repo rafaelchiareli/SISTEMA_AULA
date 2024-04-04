@@ -55,31 +55,43 @@
                             <th>Quantidade</th>
                             <th>Valor Custo</th>
                             <th>Valor Venda</th>
+                            <th>Remover</th>
                         </tr>
                     </thead>
                     <tbody>
                         @{
-
-                            for (int i = 0; i < Model.ListaProdutos.Count; i++)
+                            if (Model != null)
                             {
-                                <tr>
-                                    <td>
-                                        <input type="hidden" value="@Model.ListaProdutos[i].CodigoProduto" name="ListaProdutos[@i].CodigoProduto" />
-                                        @Model.ListaProdutos[i].DescricaoProduto
-                                    </td>
-                                    <td>
-                                        <input type="hidden" value="@Model.ListaProdutos[i].Quantidade" name="ListaProdutos[@i].Quantidade" />
-                                        @Model.ListaProdutos[i].Quantidade
-                                    </td>
-                                    <td>
-                                        <input type="hidden" value="@Model.ListaProdutos[i].ValorCusto" name="ListaProdutos[@i].ValorCusto" />
-                                        @Model.ListaProdutos[i].ValorCusto
-                                    </td>
-                                    <td>
-                                        <input type="hidden" value="@Model.ListaProdutos[i].ValorVenda" name="ListaProdutos[@i].ValorVenda" />
-                                        @Model.ListaProdutos[i].ValorVenda
-                                    </td>
-                                </tr>
+                                if (Model.ListaProdutos.Count > 0)
+                                {
+
+
+
+                                    for (int i = 0; i < Model.ListaProdutos.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <input class="produto" type="hidden" value="@Model.ListaProdutos[i].CodigoProduto" name="ListaProdutos[@i].CodigoProduto" />
+                                                @Model.ListaProdutos[i].DescricaoProduto
+                                            </td>
+                                            <td>
+                                                <input class="quantidade" type="hidden" value="@Model.ListaProdutos[i].Quantidade" name="ListaProdutos[@i].Quantidade" />
+                                                @Model.ListaProdutos[i].Quantidade
+                                            </td>
+                                            <td>
+                                                <input class="valorCusto" type="hidden" value="@Model.ListaProdutos[i].ValorCusto" name="ListaProdutos[@i].ValorCusto" />
+                                                @Model.ListaProdutos[i].ValorCusto
+                                            </td>
+                                            <td>
+                                                <input class="valorVenda" type="hidden" value="@Model.ListaProdutos[i].ValorVenda" name="ListaProdutos[@i].ValorVenda" />
+                                                @Model.ListaProdutos[i].ValorVenda
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-sm btn-danger delete"><i class="fa fa-trash"></i>Remover</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
                             }
                         }
                     </tbody>
@@ -100,6 +112,20 @@
 
 @section Scripts {
     <script>
+
+        $("table").on("click", ".delete", function () {
+            $(this).closest("tr").remove();
+
+            var linhas = $("table tbody").find("tr");
+            linhas.each(function (index) {
+                $(this).find(".produto").attr("name", `ListaProdutos[${index}].CodigoProduto`);
+                $(this).find(".quantidade").attr("name", `ListaProdutos[${index}].Quantidade`);
+                $(this).find(".valorCusto").attr("name", `ListaProdutos[${index}].ValorCusto`);
+                $(this).find(".valorVenda").attr("name", `ListaProdutos[${index}].ValorVenda`);
+            });
+
+        });
+
         function Adicionar() {
             var produto = $("#cboProduto").val();
             var quantidade = $("#txtQuantidade").val();
@@ -112,10 +138,12 @@
                 ExibirMensagem("Entrada de Produtos", "Por favor preencha todos os campos", true);
             }
             else {
-                var linha = `<tr><td><input type="hidden" value="${produto}" name="ListaProdutos[${contador}].CodigoProduto" />${descProduto}</td>`
-                    + `<td><input type="hidden" value="${quantidade}" name="ListaProdutos[${contador}].Quantidade" />${quantidade}</td>`
-                    + `<td><input type="hidden" value="${valorCusto}" name="ListaProdutos[${contador}].ValorCusto" />${valorCusto}</td>`
-                    + `<td><input type="hidden" value="${valorVenda}" name="ListaProdutos[${contador}].ValorVenda" />${valorVenda}</td></tr>`;
+                var linha = `<tr><td><input class="produto" type="hidden" value="${produto}" name="ListaProdutos[${contador}].CodigoProduto" />${descProduto}</td>`
+                    + `<td><input class="quantidade" type="hidden" value="${quantidade}" name="ListaProdutos[${contador}].Quantidade" />${quantidade}</td>`
+                    + `<td><input class="valorCusto" type="hidden" value="${valorCusto}" name="ListaProdutos[${contador}].ValorCusto" />${valorCusto}</td>`
+                    + `<td><input class="valorVenda" type="hidden" value="${valorVenda}" name="ListaProdutos[${contador}].ValorVenda" />${valorVenda}</td>`
+                    + `<td> <button type="button" class="btn btn-sm btn-danger delete"><i class="fa fa-trash"></i>Remover</button></td></tr>`;
+
                 $("#tbProdutos tbody").append(linha);
             }
         }
