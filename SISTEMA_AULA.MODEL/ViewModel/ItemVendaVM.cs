@@ -14,6 +14,10 @@ namespace SISTEMA_AULA.MODEL.ViewModel
         public int Quantidade { get; set; }
         public decimal ValorItem { get; set; }
 
+        public ItemVendaVM()
+        {
+                
+        }
 
     }
 }

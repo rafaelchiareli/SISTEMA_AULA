@@ -3,46 +3,79 @@
 <h4>VendaVM</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col">
         <form asp-action="Maintain">
+            <input type="hidden" asp-for="CodigoVenda" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CodigoVenda" class="control-label"></label>
-                <input asp-for="CodigoVenda" class="form-control" />
-                <span asp-validation-for="CodigoVenda" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="DataVenda" class="control-label"></label>
-                <input asp-for="DataVenda" class="form-control" />
+                <input asp-for="DataVenda" class="form-control" required />
                 <span asp-validation-for="DataVenda" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CodigoCliente" class="control-label"></label>
-                <input asp-for="CodigoCliente" class="form-control" />
+                <select required asp-for="CodigoCliente" class="form-select" asp-items="@ViewBag.listaClientes">
+                    <option selected value="">Selecione um Cliente</option>
+                </select>
                 <span asp-validation-for="CodigoCliente" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CodigoTipoPagamento" class="control-label"></label>
-                <input asp-for="CodigoTipoPagamento" class="form-control" />
+                <select required asp-for="CodigoTipoPagamento" class="form-select" asp-items="@ViewBag.listaTipoPagamento">
+                    <option selected value="">Selecione um Tipo de Pagamento</option>
+                </select>
                 <span asp-validation-for="CodigoTipoPagamento" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="divParcelas" style="display:none">
                 <label asp-for="QtdParcelas" class="control-label"></label>
                 <input asp-for="QtdParcelas" class="form-control" />
                 <span asp-validation-for="QtdParcelas" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Usuario" class="control-label"></label>
-                <input asp-for="Usuario" class="form-control" />
-                <span asp-validation-for="Usuario" class="text-danger"></span>
+                <input type="submit" value="Create" class="btn btn-success" />
             </div>
-            <div class="form-group">
-                <label asp-for="TipoPagamento" class="control-label"></label>
-                <input asp-for="TipoPagamento" class="form-control" />
-                <span asp-validation-for="TipoPagamento" class="text-danger"></span>
+
+            <br />
+            <div style="display:flex;gap:10px">
+                <div class="col-md-3">
+                    <label class="form-label">Produto</label>
+                    <select id="cboProdutos" class="form-select col">
+                        <option selected value="">Selecione um produto</option>
+                        @foreach (VwEstoque produto in ViewBag.listaProdutos)
+                        {
+                            <option data-qtd="@produto.Quantidade" value="@produto.ProCodigo">@produto.ProDescricao</option>
+                        }
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label">Valor Produto</label>
+                    <input type="text" class="form-control" id="txtValor" readonly />
+                </div>
+                <div>
+                    <label class="form-label">Quantidade</label>
+                    <input type="text" class="form-control" id="txtQtd" />
+                </div>
+                <div>
+                    <label class="form-label">Valor Total</label>
+                    <input type="text" class="form-control" id="txtValorTotal" />
+                </div>
+                <button onClick="AdicionarProduto()" type="button" class="btn btn-success">Adicionar</button>
+
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Valor</th>
+                            <th>Quantidade</th>
+                            <th>Valor Total</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
         </form>
     </div>
@@ -52,3 +85,61 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+
+    <script>
+        $("#CodigoTipoPagamento").on("change", function () {
+            if ($(this).val() == "3") {
+                $("#divParcelas").show();
+                $("#QtdParcelas").attr("required", "true")
+            } else {
+                $("#divParcelas").hide();
+                $("#QtdParcelas").attr("required", "false")
+            }
+        });
+
+        $("#cboProdutos").on("change", function () {
+            const urlConsulta = "@Url.Action("SelecionarProduto", "Venda")";
+            const codProduto = $(this).val();
+
+            $.get(urlConsulta + "?codProduto=" + codProduto, function (data) {
+                $("#txtValor").val(data.valorVenda);
+
+            })
+        })
+
+        $("#txtQtd").on("blur", function () {
+            var qtd = $(this).val();
+            if (qtd == ""){
+                ExibirMensagem("Erro", "Por favor informe a quantidade", true);
+            }else{
+                var valorVenda = $("#txtValor").val();
+                $("#txtValorTotal").val(qtd * valorVenda);
+            }
+            
+          
+        });
+
+        AdicionarProduto = () => {            
+            var codProduto = $("#cboProdutos").val();
+            var descProduto = $("#cboProdutos option:selected").text();
+            var quantidade = parseInt($("#txtQtd").val());
+            var valorVenda = $("#txtValor").val();
+            var qtdEstoque = parseInt($("#cboProdutos option:selected").attr("data-qtd"));
+            console.log('qtd', typeof (quantidade));
+            console.log('qtdEstoque', typeof (qtdEstoque));
+            if (quantidade > qtdEstoque) {
+                ExibirMensagem("Erro","A quantidade vendida não pode ser maior que a quantidade em estoque", true);
+            } else {
+                var linha = `<tr><td>${descProduto}</td><td>${valorVenda}</td><td>${quantidade}</td><td>${valorVenda * quantidade}</td></tr>`;
+                $("table tbody").append(linha);
+            }
+
+
+
+        }
+
+
+    </script>
+
+}

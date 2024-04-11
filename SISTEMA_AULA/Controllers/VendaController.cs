@@ -17,17 +17,25 @@ namespace SISTEMA_AULA.Controllers
             _ServiceVenda = new ServiceVenda(context);
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+          
+            return View(await _ServiceVenda.ListarVendas());
         }
 
         public async Task<IActionResult> MaintainAsync()
         {
             ViewBag.listaTipoPagamento = new SelectList(await _ServiceVenda.oRepositoryTipoPagamento.SelecionarTodosAsync(), nameof(TipoPagamento.TpgCodigo), nameof(TipoPagamento.TpgDescricao));
-            ViewBag.listaProdutos = new SelectList(await _ServiceVenda.oRepositoryProduto.SelecionarTodosAsync(), nameof(Produto.ProCodigo), nameof(Produto.ProDescricao));
+            ViewBag.listaProdutos = await _ServiceVenda.oRepositoryVwEstoque.SelecionarTodosAsync();
             ViewBag.listaClientes = new SelectList(await _ServiceVenda.oRepositoryCliente.SelecionarTodosAsync(), nameof(Cliente.CliCodigo), nameof(Cliente.CliNome));
             return View();
+        }
+
+        
+        public async Task<IActionResult> SelecionarProduto(int codProduto)
+        {
+            var produto = await _ServiceVenda.oRepositoryVwEstoque.SelecionarChaveAsync(codProduto);
+            return Ok(produto);
         }
     }
 
