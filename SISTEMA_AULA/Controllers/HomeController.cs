@@ -1,10 +1,12 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SISTEMA_AULA.Models;
 using System.Diagnostics;
 
 namespace SISTEMA_AULA.Controllers
 {
-    public class HomeController : Controller
+   
+    public class HomeController : DefaultController
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -18,6 +20,7 @@ namespace SISTEMA_AULA.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return View();

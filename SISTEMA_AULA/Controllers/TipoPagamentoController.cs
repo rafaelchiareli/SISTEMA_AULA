@@ -1,19 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.ObjectModelRemoting;
 using Microsoft.EntityFrameworkCore;
 using SISTEMA_AULA.MODEL.Models;
 
 namespace SISTEMA_AULA.Controllers
 {
-    public class TipoPagamentoController : Controller
+    public class TipoPagamentoController : DefaultController
     {
-
+        [AllowAnonymous]
         public async Task<IActionResult> Index() {
             var db = new DbsistemasContext();
             var listaTipoPagamento = await db.TipoPagamentos.ToListAsync();
             return View(listaTipoPagamento);
         }
 
+       
         public ActionResult Create()
         {
             return View();
@@ -44,7 +46,7 @@ namespace SISTEMA_AULA.Controllers
             return View(tipoPagamento);
            
         }
-
+        [Authorize]
         public async Task<IActionResult> Edit(TipoPagamento tipoPagamento)
         {
             if (ModelState.IsValid)
