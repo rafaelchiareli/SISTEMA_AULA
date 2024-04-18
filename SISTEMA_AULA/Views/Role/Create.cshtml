@@ -1,0 +1,24 @@
+﻿@model Role
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h2>CadastrarRole</h2>
+<form asp-action="Create" method="post">
+
+    <div>
+        <label class="form-label">Nome</label>
+        <input asp-for="RoleName" class="form-control" />
+    </div>
+    <button class="btn btn-primary">Salvar</button>
+</form>
+@section Scripts {
+    <script>
+        var msg = "@ViewData["Mensagem"]";
+
+        if (msg != ""){
+            ExibirMensagem(msg);
+        }
+    </script>
+}

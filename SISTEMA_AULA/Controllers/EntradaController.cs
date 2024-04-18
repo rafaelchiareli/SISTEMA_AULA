@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using SISTEMA_AULA.MODEL.Models;
 using SISTEMA_AULA.MODEL.Services;
 using SISTEMA_AULA.MODEL.ViewModel;
@@ -9,10 +11,13 @@ namespace SISTEMA_AULA.Controllers
     {
         private ServiceEntrada _serviceEntrada;
         private DbsistemasContext _context;
+        private UserManager<IdentityUser> _userManager;
 
-        public EntradaController(DbsistemasContext context)
+       
+        public EntradaController(DbsistemasContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
             _serviceEntrada = new ServiceEntrada(_context);
         }
 
@@ -36,17 +41,27 @@ namespace SISTEMA_AULA.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(EntradaVM entradaVM)
         {
-            if (entradaVM.CodigoEntrada > 0)
-            {
-                await _serviceEntrada.AlterarEntradaProdutoAsync(entradaVM);
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                await _serviceEntrada.IncluirEntradaProdutoAsync(entradaVM);
-                return RedirectToAction("Index");
-            }
-           
+            var user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+            //if (entradaVM.CodigoEntrada != null)
+            //{
+            //    if (entradaVM.CodigoEntrada > 0)
+            //    {
+
+            //        await _serviceEntrada.AlterarEntradaProdutoAsync(entradaVM);
+            //        return RedirectToAction("Index");
+            //    }
+            //    else
+            //    {
+            //        return RedirectToAction("Index");
+            //    }
+            //}
+
+            //else
+            //{
+            //    await _serviceEntrada.IncluirEntradaProdutoAsync(entradaVM);
+            //    
+            //}
+            return RedirectToAction("Index");
         }
 
 

@@ -1,0 +1,38 @@
+﻿@model UserRole
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h2>Relacionar usuário com as roles</h2>
+<form asp-action="Create">
+    <div>
+        <label class="form-label">Usarios</label>
+        <select asp-for="UserId" class="form-select">
+            @foreach (IdentityUser item in ViewBag.listaUsuarios)
+            {
+                <option value="@item.Id">@item.UserName</option>
+            }
+        </select>
+    </div>
+
+    <div>
+        <label class="form-label">Usarios</label>
+        <select asp-for="RoleName" class="form-select">
+            @foreach (IdentityRole item in ViewBag.listaRoles)
+            {
+                <option value="@item.Name">@item.Name</option>
+            }
+        </select>
+    </div>
+    <button class="btn btn-primary">Salvar</button>
+</form>
+@section Scripts {
+    <script>
+        var msg = "@ViewData["Mensagem"]";
+
+        if (msg != "") {
+            ExibirMensagem(msg);
+        }
+    </script>
+}
