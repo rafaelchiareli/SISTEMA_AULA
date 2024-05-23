@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SISTEMA_AULA.MODEL.Models;
 using SISTEMA_AULA.MODEL.Services;
+using SISTEMA_AULA.MODEL.ViewModel;
 
 namespace SISTEMA_AULA.API.Controllers
 {
@@ -27,5 +28,14 @@ namespace SISTEMA_AULA.API.Controllers
         {
             return Ok(await _Service.oRepositoryCliente.SelecionarChaveAsync(id));
         }
+
+        [HttpPost("PostCliente")]
+        public async Task<IActionResult> Post(Class1 cliente)
+        {
+           //await _Service.oRepositoryCliente.IncluirAsync(cliente);
+            return Ok("Cliente Cadastrado com sucesso");
+        }
     }
+
+
 }
