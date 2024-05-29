@@ -1,4 +1,5 @@
-﻿using SISTEMA_AULA.MODEL.Interfaces;
+﻿using SISTEMA_AULA.MODEL.DTO;
+using SISTEMA_AULA.MODEL.Interfaces;
 using SISTEMA_AULA.MODEL.Models;
 using SISTEMA_AULA.MODEL.Repositories;
 using SISTEMA_AULA.MODEL.ViewModel;
@@ -21,6 +22,22 @@ namespace SISTEMA_AULA.MODEL.Services
             _context = context;
             oRepositoryCliente = new RepositoryCliente(context);
             oRepositoryEndereco = new RepositoryEndereco(context);
+        }
+
+        public async Task IncluirClienteDTO(ClienteDTO clienteDTO)
+        {
+            var cliente = new Cliente()
+            {
+                CliCpfcnpj = clienteDTO.cliCpfcnpj,
+                CliDataNascimento = clienteDTO.cliDataNascimento,
+                CliEmail = clienteDTO.cliEmail,
+                CliNome = clienteDTO.cliNome,
+                CliSexo = clienteDTO.cliSexo,
+                CliNomeMae = clienteDTO.cliNomeMae,
+                CliTelefone = clienteDTO.CliTelefone
+
+            };
+            oRepositoryCliente.Incluir(cliente);
         }
 
         public async Task<ClienteVM> IncluirClienteAsync(ClienteVM clienteVM)

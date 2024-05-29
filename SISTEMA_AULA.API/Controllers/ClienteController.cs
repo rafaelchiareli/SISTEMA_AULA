@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SISTEMA_AULA.MODEL.DTO;
 using SISTEMA_AULA.MODEL.Models;
 using SISTEMA_AULA.MODEL.Services;
 using SISTEMA_AULA.MODEL.ViewModel;
@@ -30,9 +31,9 @@ namespace SISTEMA_AULA.API.Controllers
         }
 
         [HttpPost("PostCliente")]
-        public async Task<IActionResult> Post(Class1 cliente)
+        public async Task<IActionResult> Post(ClienteDTO cliente)
         {
-           //await _Service.oRepositoryCliente.IncluirAsync(cliente);
+            await _Service.IncluirClienteDTO(cliente);
             return Ok("Cliente Cadastrado com sucesso");
         }
     }
