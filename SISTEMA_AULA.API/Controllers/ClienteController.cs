@@ -36,6 +36,13 @@ namespace SISTEMA_AULA.API.Controllers
             await _Service.IncluirClienteDTO(cliente);
             return Ok("Cliente Cadastrado com sucesso");
         }
+
+        [HttpPut("PutCliente")]
+        public async Task<IActionResult> Put(ClienteDTO cliente)
+        {
+            await _Service.AlterarClienteDTO(cliente);
+            return Ok("Cliente Cadastrado com sucesso");
+        }
     }
 
 

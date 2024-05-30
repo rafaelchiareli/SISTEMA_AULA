@@ -28,6 +28,7 @@ namespace SISTEMA_AULA.MODEL.Services
         {
             var cliente = new Cliente()
             {
+                CliCodigo = clienteDTO.cliCodigo,
                 CliCpfcnpj = clienteDTO.cliCpfcnpj,
                 CliDataNascimento = clienteDTO.cliDataNascimento,
                 CliEmail = clienteDTO.cliEmail,
@@ -37,9 +38,25 @@ namespace SISTEMA_AULA.MODEL.Services
                 CliTelefone = clienteDTO.CliTelefone
 
             };
-            oRepositoryCliente.Incluir(cliente);
+           await  oRepositoryCliente.IncluirAsync(cliente);
         }
 
+        public async Task AlterarClienteDTO(ClienteDTO clienteDTO)
+        {
+            var cliente = new Cliente()
+            {
+                CliCodigo = clienteDTO.cliCodigo,
+                CliCpfcnpj = clienteDTO.cliCpfcnpj,
+                CliDataNascimento = clienteDTO.cliDataNascimento,
+                CliEmail = clienteDTO.cliEmail,
+                CliNome = clienteDTO.cliNome,
+                CliSexo = clienteDTO.cliSexo,
+                CliNomeMae = clienteDTO.cliNomeMae,
+                CliTelefone = clienteDTO.CliTelefone
+
+            };
+            await oRepositoryCliente.AlterarAsync(cliente);
+        }
         public async Task<ClienteVM> IncluirClienteAsync(ClienteVM clienteVM)
         {
             var cliente = new Cliente()

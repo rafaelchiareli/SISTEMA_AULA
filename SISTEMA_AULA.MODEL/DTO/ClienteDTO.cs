@@ -8,7 +8,7 @@ namespace SISTEMA_AULA.MODEL.DTO
 {
     public  class ClienteDTO
     {
-        
+        public int cliCodigo { get; set; }
         public string cliCpfcnpj { get; set; }
         public DateTime cliDataNascimento { get; set; }
         public string cliEmail { get; set; }
