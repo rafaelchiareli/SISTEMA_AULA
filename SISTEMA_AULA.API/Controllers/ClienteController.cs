@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata;
 using SISTEMA_AULA.MODEL.DTO;
 using SISTEMA_AULA.MODEL.Models;
 using SISTEMA_AULA.MODEL.Services;
@@ -42,6 +43,22 @@ namespace SISTEMA_AULA.API.Controllers
         {
             await _Service.AlterarClienteDTO(cliente);
             return Ok("Cliente Cadastrado com sucesso");
+        }
+
+        [HttpDelete("DeleteCliente/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await _Service.oRepositoryCliente.ExcluirAsync(id);
+                return Ok("Cliente Excluido com sucesso");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+         
+
         }
     }
 
